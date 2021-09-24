@@ -2,6 +2,8 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+yarn add prettier eslint-plugin-prettier eslint-config-prettier -D
+
 ## Available Scripts
 
 In the project directory, you can run:
