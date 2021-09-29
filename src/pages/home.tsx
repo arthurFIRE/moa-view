@@ -1,7 +1,24 @@
 import React from "react";
 
 const Home: React.FC = () => {
-  return <h1>Home</h1>;
+  const birthday = new Date(2021, 6, 23);
+  const today = new Date();
+  const plusTime = today.getTime() - birthday.getTime();
+
+  const dPlusDay = Math.floor(plusTime / (1000 * 60 * 60 * 24));
+
+  const dPlusWeek = Math.floor(plusTime / (1000 * 60 * 60 * 24 * 7));
+  const dPlusDayOfWeek = Math.floor(
+    (plusTime % (1000 * 60 * 60 * 24 * 7)) / (1000 * 60 * 60 * 24)
+  );
+
+  return (
+    <div>
+      <h2>
+        아영이 태어난지 {dPlusDay}일, {dPlusWeek}주{dPlusDayOfWeek}일
+      </h2>
+    </div>
+  );
 };
 
 export default Home;
