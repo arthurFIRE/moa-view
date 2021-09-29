@@ -14,7 +14,7 @@ const Home: React.FC = () => {
 
   return (
     <div>
-      <h2>
+      <h2 style={{ color: "cadetblue" }}>
         아영이 태어난지 {dPlusDay}일, {dPlusWeek}주{dPlusDayOfWeek}일
       </h2>
     </div>
