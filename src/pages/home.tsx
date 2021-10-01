@@ -5,8 +5,7 @@ const Home: React.FC = () => {
   const today = new Date();
   const plusTime = today.getTime() - birthday.getTime();
 
-  const dPlusDay = Math.floor(plusTime / (1000 * 60 * 60 * 24));
-
+  const dPlusDay = Math.floor(plusTime / (1000 * 60 * 60 * 24)) + 1;
   const dPlusWeek = Math.floor(plusTime / (1000 * 60 * 60 * 24 * 7));
   const dPlusDayOfWeek = Math.floor(
     (plusTime % (1000 * 60 * 60 * 24 * 7)) / (1000 * 60 * 60 * 24)
