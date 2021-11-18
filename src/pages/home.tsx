@@ -70,10 +70,7 @@ const Home: React.FC = () => {
         </ul>
       </div>
       <div>
-        <img
-          width={300}
-          src="https://cvws.icloud-content.com/S/AfE_onD_e8h1JwW0sklu6XonLbV5/IMG_0926.JPG?o=AnOpM3oblzmomz7N5SxUZ-RtpkP2P6fSPGEFvx7fGMgh&v=1&z=https%3A%2F%2Fp60-content.icloud.com%3A443&x=1&a=CAog7oE20MiE72U7gVYFs6qAzGC1LcW7mCoWK_gs0t_KnXMSaRDU2bSz0i8Y1PDHuNIvIgEAUgQnLbV5aiezGhxZWKoU-1HxoPMaBUzJchpvx9ss3MZs9HK5Vco_TN1xKUGPksNyJ8Bwr7ogJICWnhn6YJFf_DaY-wVrsMukRi626qAQVi3VeE4-13rDxg&e=1637038028&r=b710d172-2a10-4904-af40-91fcc207e2aa-2&s=4XTl8wkSSbTyklifkn9iLO__mM4"
-        />
+        <img width={300} src="/azero.jpg" />
       </div>
     </div>
   );
