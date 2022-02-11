@@ -18,6 +18,11 @@ const Home: React.FC = () => {
     JSON.parse(milkString || "[]")
   );
 
+  const sleepString = localStorage.getItem("sleep");
+  const [sleepList, setSleepList] = useState<Array<string>>(
+    JSON.parse(sleepString || "[]")
+  );
+
   const addMilk = () => {
     const newMilkList = [new Date().toISOString(), ...milkList];
     setMilk(newMilkList);
@@ -33,6 +38,21 @@ const Home: React.FC = () => {
     localStorage.setItem("milk", JSON.stringify(newMilkList));
   };
 
+  const addSleep = () => {
+    const newSleepList = [new Date().toISOString(), ...sleepList];
+    setSleep(newSleepList);
+  };
+
+  const resetSleep = () => {
+    const newSleepList: Array<string> = [];
+    setSleep(newSleepList);
+  };
+
+  const setSleep = (newSleepList: Array<string>) => {
+    setSleepList(newSleepList);
+    localStorage.setItem("sleep", JSON.stringify(newSleepList));
+  };
+
   return (
     <div style={{ color: "cadetblue" }}>
       <h2 style={{ marginBottom: 0 }}>아영이 태어난지 {dPlusDay}일</h2>
@@ -40,34 +60,68 @@ const Home: React.FC = () => {
         ({dPlusWeek}주{dPlusDayOfWeek}일, {dPlusMonth}개월)
       </div>
       <div>
-        <h3 style={{ float: "left", marginLeft: 15 }}>* 분유</h3>
-        <div style={{ float: "right", marginRight: 15, marginTop: 18 }}>
-          <button
-            type="button"
-            style={{ width: 100 }}
-            onClick={() => {
-              addMilk();
-            }}
-          >
-            시작
-          </button>
-          <button
-            type="button"
-            style={{ marginLeft: 10, width: 100 }}
-            onClick={() => {
-              resetMilk();
-            }}
-          >
-            리셋
-          </button>
+        <div>
+          <h3 style={{ float: "left", marginLeft: 15 }}>* 분유</h3>
+          <div style={{ float: "right", marginRight: 15, marginTop: 18 }}>
+            <button
+              type="button"
+              style={{ width: 100 }}
+              onClick={() => {
+                addMilk();
+              }}
+            >
+              시작
+            </button>
+            <button
+              type="button"
+              style={{ marginLeft: 10, width: 100 }}
+              onClick={() => {
+                resetMilk();
+              }}
+            >
+              리셋
+            </button>
+          </div>
+        </div>
+        <div style={{ paddingTop: 50 }}>
+          <ul>
+            {milkList.map((milk) => (
+              <li>{moment(milk).format("YYYY-MM-DD HH:mm")}</li>
+            ))}
+          </ul>
         </div>
       </div>
-      <div style={{ marginTop: 70 }}>
-        <ul>
-          {milkList.map((milk) => (
-            <li>{moment(milk).format("YYYY-MM-DD HH:mm")}</li>
-          ))}
-        </ul>
+      <div>
+        <div>
+          <h3 style={{ float: "left", marginLeft: 15 }}>* 수면</h3>
+          <div style={{ float: "right", marginRight: 15, marginTop: 18 }}>
+            <button
+              type="button"
+              style={{ width: 100 }}
+              onClick={() => {
+                addSleep();
+              }}
+            >
+              시작
+            </button>
+            <button
+              type="button"
+              style={{ marginLeft: 10, width: 100 }}
+              onClick={() => {
+                resetSleep();
+              }}
+            >
+              리셋
+            </button>
+          </div>
+        </div>
+        <div style={{ paddingTop: 50 }}>
+          <ul>
+            {sleepList.map((sleepTime) => (
+              <li>{moment(sleepTime).format("YYYY-MM-DD HH:mm")}</li>
+            ))}
+          </ul>
+        </div>
       </div>
       <div>
         <img width={300} src="/azero.jpg" />
