@@ -2,32 +2,53 @@ import moment from "moment";
 import React, { useState } from "react";
 import MilkPopup from "./MilkPopup";
 
+interface Milk {
+  startDate: string;
+  amount?: number;
+}
+
 const MilkList: React.FC = () => {
   const [milkPopup, setMilkPopup] = useState<React.ReactNode | undefined>();
 
   const milkString = localStorage.getItem("milk");
-  const [milkList, setMilkList] = useState<Array<string>>(
+  const [milkList, setMilkList] = useState<Array<Milk>>(
     JSON.parse(milkString || "[]")
   );
 
   const addMilk = () => {
-    const newMilkList = [new Date().toISOString(), ...milkList];
+    const newMilkList = [{ startDate: new Date().toISOString() }, ...milkList];
     setMilk(newMilkList);
   };
 
   const resetMilk = () => {
-    const newMilkList: Array<string> = [];
+    const newMilkList: Array<Milk> = [];
     setMilk(newMilkList);
   };
 
-  const setMilk = (newMilkList: Array<string>) => {
+  const setMilk = (newMilkList: Array<Milk>) => {
     setMilkList(newMilkList);
     localStorage.setItem("milk", JSON.stringify(newMilkList));
   };
 
+  const saveAmount = (idx: number, amount: number) => {
+    console.log("amount : ", amount);
+    var newMilkList = milkList.map((milk, index) =>
+      index === idx ? { ...milk, amount: amount } : milk
+    );
+
+    setMilk(newMilkList);
+  };
+
   function openMilkPopup(idx: number) {
     console.log("idx ", idx);
-    setMilkPopup(<MilkPopup />);
+    setMilkPopup(
+      <MilkPopup
+        callback={(amount) => {
+          setMilkPopup(undefined);
+          amount && saveAmount(idx, amount);
+        }}
+      />
+    );
   }
 
   return (
@@ -60,7 +81,8 @@ const MilkList: React.FC = () => {
         <ul>
           {milkList.map((milk, idx) => (
             <li key={idx} onClick={() => openMilkPopup(idx)}>
-              {moment(milk).format("YYYY-MM-DD HH:mm")}
+              {moment(milk.startDate).format("YYYY-MM-DD HH:mm")} :{" "}
+              {milk.amount && `${milk.amount}ml`}
             </li>
           ))}
         </ul>

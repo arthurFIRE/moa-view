@@ -1,13 +1,31 @@
-import React from "react";
+import React, { useRef } from "react";
 import Popup from "./Popup";
 
-const MilkPopup: React.FC = () => {
+interface MilkPopup {
+  callback: (amount?: number) => void;
+}
+
+const MilkPopup: React.FC<MilkPopup> = ({ callback }: MilkPopup) => {
+  const inputRef = useRef<HTMLInputElement>(null);
+  const onClickHandler = () => {
+    console.log(
+      "Number(inputRef?.current.value)",
+      Number(inputRef?.current?.value)
+    );
+    callback(
+      inputRef?.current?.value ? Number(inputRef?.current?.value) : undefined
+    );
+  };
   return (
     <Popup>
       <div>
         <div>
-          <input type="number" /> ml
-          <button type="button" style={{ marginLeft: 10 }}>
+          <input ref={inputRef} type="number" /> ml
+          <button
+            type="button"
+            style={{ marginLeft: 10 }}
+            onClick={() => onClickHandler()}
+          >
             Save
           </button>
         </div>
